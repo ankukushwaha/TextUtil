@@ -77,7 +77,6 @@ function TextArea(props) {
       props.func("Number Extracted");
     }
     else{
-      setText("");
       props.func("No Number Found");
     }
   }
@@ -87,7 +86,6 @@ function TextArea(props) {
     const ans = val.value.replace(/\d/g, "");
     const len = ans.split(" ").filter((val) => {return val.length !== 0}).length;
     if(len === 0){
-      setText("");
       props.func("No Text Found");
     }
     else{
@@ -105,7 +103,6 @@ function TextArea(props) {
       props.func("Email Extracted");
     }
     else{
-      setText("");
       props.func("No Email Found");
     }
   }
