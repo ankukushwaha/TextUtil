@@ -9,31 +9,63 @@ function TextArea(props) {
   }
 
   function handleUpClick() {
-    const value = text.toUpperCase();
-    setText(value);
-    props.func("Converted To Upper Case");
+    if(text.length === 0){
+      props.func("Enter any text first");
+    }
+    else{
+      const value = text.toUpperCase();
+      setText(value);
+      props.func("Converted To Upper Case");
+    }
+    
   }
   function handleLoClick() {
-    const value = text.toLowerCase();
-    setText(value);
-    props.func("Converted To Lower Case");
+    if(text.length === 0){
+      props.func("Enter any text first");
+    }
+    else{
+      const value = text.toLowerCase();
+      setText(value);
+      props.func("Converted To Lower Case");
+    }
+    
   }
   function handleClearClick() {
-    const value = "";
-    setText(value);
-    props.func("Cleared");
+    if(text.length !== 0){
+      setText("");
+      props.func("Cleared");
+    }
+    else{
+      props.func("Nothing is to clear");
+    }    
   }
   function handleCopyText() {
     const val1 = document.getElementById("my-box");
     val1.select();
-    navigator.clipboard.writeText(val1.value);
-    props.func("Copy To Clipboard");
+    if(val1.value.length !== 0){
+      navigator.clipboard.writeText(val1.value);
+      document.getSelection().removeAllRanges();
+      props.func("Copy To Clipboard");
+    }
+    else{
+      props.func("Write something to copy");
+    }
   }
   function handleRemoveExtraSpace() {
     const val = document.getElementById("my-box");
     const ans = val.value.replace(/\s+/g, " ");
-    setText(ans);
-    props.func("Extra Spaces Removed");
+    if(text.length !== 0){
+      if(text.length === ans.length){
+        props.func("No Extra Spaces Found");
+      }
+      else{
+        setText(ans);
+        props.func("Extra Spaces Removed");
+      }
+    }
+    else{
+      props.func("Enter any text first");
+    }
   }
 
   function ExtractNumber() {
@@ -41,22 +73,41 @@ function TextArea(props) {
     const ans = val.value.match(/\d/g);
     if (ans) {
       ans.join("");
+      setText(ans);
+      props.func("Number Extracted");
     }
-    setText(ans);
-    props.func("Number Extracted");
+    else{
+      setText("");
+      props.func("No Number Found");
+    }
   }
+
   function ExtractText() {
     const val = document.getElementById("my-box");
     const ans = val.value.replace(/\d/g, "");
-    setText(ans);
-    props.func("Text Extracted");
+    const len = ans.split(" ").filter((val) => {return val.length !== 0}).length;
+    if(len === 0){
+      setText("");
+      props.func("No Text Found");
+    }
+    else{
+      setText(ans);
+      props.func("Text Extracted");
+    }
   }
+
   function ExtractEmail() {
     const val = document.getElementById("my-box");
     const email = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
     const ans = val.value.match(email);
-    setText(ans);
-    props.func("Email Extracted");
+    if(ans){
+      setText(ans);
+      props.func("Email Extracted");
+    }
+    else{
+      setText("");
+      props.func("No Email Found");
+    }
   }
 
   return (
@@ -132,21 +183,18 @@ function TextArea(props) {
       <div className="text-white mt-3">
         <h3>Your Text Summary</h3>
 
-        <p>
-          {text && (text.length === 0 ? 0 : text.toString().split(" ").length)}{" "}
-          Words and {text && text.length} Characters
-        </p>
+        <p>{text.toString().split(" ").filter((val) => {
+          return val.length !== 0;
+        }).length} Words and {text.length} Characters</p>
 
-        <p>
-          {text &&
-            (text.length === 0
-              ? 0
-              : 0.008 * text.toString().split(" ").length)}{" "}
+        <p>{0.008 * text.toString().split(" ").filter((val) => {
+          return val.length !== 0;
+        }).length}{" "}
           minutes to read
         </p>
 
         <h4>Preview</h4>
-        <p>{text}</p>
+        <p>{text.length !== 0 ? text : "Enter something to preview"}</p>
       </div>
     </div>
   );
