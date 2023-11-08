@@ -1,0 +1,25 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+    height: 100vh;
+  background-color: #494848;
+  background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
+}
+
+/* switches  */
+.switch1 {
+  background-color: #7c2222e3;
+}
+.switch2 {
+  background-color: #256855c4;
+}
+.switch3 {
+  background-color: blue;
+}
+
+footer{
+    /* position: absolute; */
+    margin-top: 58px;
+}
