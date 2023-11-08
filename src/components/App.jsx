@@ -22,11 +22,9 @@ function App() {
     if (toggleMode === "light") {
       setToggleMode("dark");
       document.body.style.backgroundColor = "#7c2222e3";
-      showAlert("Brown Mode Enabled");
     } else {
       setToggleMode("light");
       document.body.style.backgroundColor = "#494848";
-      showAlert("Light Mode Enabled");
     }
   }
 
@@ -34,11 +32,9 @@ function App() {
     if (toggleMode === "light") {
       setToggleMode("dark");
       document.body.style.backgroundColor = "#256855c4";
-      showAlert("Green Mode Enabled");
     } else {
       setToggleMode("light");
       document.body.style.backgroundColor = "#494848";
-      showAlert("Light Mode Enabled");
     }
   }
 
@@ -46,11 +42,9 @@ function App() {
     if (toggleMode === "light") {
       setToggleMode("dark");
       document.body.style.backgroundColor = "rgb(4 48 72)";
-      showAlert("Blue Mode Enabled");
     } else {
       setToggleMode("light");
       document.body.style.backgroundColor = "#494848";
-      showAlert("Light Mode Enabled");
     }
   }
 
