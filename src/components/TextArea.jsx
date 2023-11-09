@@ -40,11 +40,8 @@ function TextArea(props) {
     }    
   }
   function handleCopyText() {
-    const val1 = document.getElementById("my-box");
-    val1.select();
-    if(val1.value.length !== 0){
-      navigator.clipboard.writeText(val1.value);
-      document.getSelection().removeAllRanges();
+    if(text.length !== 0){
+      navigator.clipboard.writeText(text);
       props.func("Copy To Clipboard");
     }
     else{
@@ -180,11 +177,11 @@ function TextArea(props) {
       <div className="text-white mt-3">
         <h3>Your Text Summary</h3>
 
-        <p>{text.toString().split(" ").filter((val) => {
+        <p>{text.toString().split(/\s+/).filter((val) => {
           return val.length !== 0;
         }).length} Words and {text.length} Characters</p>
 
-        <p>{0.008 * text.toString().split(" ").filter((val) => {
+        <p>{0.008 * text.toString().split(/\s+/).filter((val) => {
           return val.length !== 0;
         }).length}{" "}
           minutes to read
